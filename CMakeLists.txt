@@ -1,0 +1,37 @@
+idf_component_register(
+    SRCS
+        nbufferdevice.cpp
+        nbytearray.cpp
+        ncolor.cpp
+        ncoreapplication.cpp
+        ndatastream.cpp
+        ndebug.cpp
+        nevent.cpp
+        neventloop.cpp
+        nfile.cpp
+        ngpiopin.cpp
+        ni2c.cpp
+        nimage.cpp
+        niodevice.cpp
+        nobject.cpp
+        npoint.cpp
+        nrect.cpp
+        nserialport.cpp
+        nsize.cpp
+        nspibus.cpp
+        nspidevice.cpp
+        nstring.cpp
+        ntimer.cpp
+        nvariant.cpp
+        nsignalbus.cpp
+        ntranslator.cpp
+        nthread.cpp
+        nmetaconnection.cpp
+        nmutex.cpp
+    INCLUDE_DIRS
+        "."
+    REQUIRES
+        freertos
+        esp_timer
+        driver
+)
