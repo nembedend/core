@@ -19,7 +19,6 @@ NTimer::NTimer(NObject* parent)
     , m_handle(nullptr)
     , m_timerId(0)
 {
-    printf("[NTimer] this=%p\n", this);
 }
 
 NTimer::NTimer(TimerType type, NObject* parent)
@@ -30,28 +29,22 @@ NTimer::NTimer(TimerType type, NObject* parent)
     , m_handle(nullptr)
     , m_timerId(0)
 {
-    printf("[NTimer] this=%p\n", this);
 }
 
 NTimer::~NTimer()
 {
-    printf("[NTimer] this=%p\n", this);
     stop();
     deleteTimer();
 }
 
 void NTimer::start(int msec)
 {
-    printf("[NTimer] setInterval(%d)\n", msec);
     setInterval(msec);
     start();
 }
 
 void NTimer::start()
 {
-    printf("[NTimer] this=%p\n", this);
-    printf("[NTimer] start() called, interval=%d\n", m_interval); // DEBUG
-
     if (m_interval <= 0) {
         nWarning() << "NTimer::start: Invalid interval" << m_interval;
         return;
@@ -149,23 +142,19 @@ void NTimer::singleShot(int msec, std::function<void()> function)
 
 void NTimer::timerCallback(TimerHandle_t xTimer)
 {
-    printf("[NTimer::timerCallback] entered\n");
     NTimer* timer = static_cast<NTimer*>(pvTimerGetTimerID(xTimer));
     if (!timer || timer->m_timerId == 0) {
-        printf("[NTimer::timerCallback] invalid timer\n");
         return;
     }
     NTimerEvent* event = new NTimerEvent(timer->m_timerId);
-    printf("[NTimer::timerCallback] about to call postEvent, receiver=%p\n", timer);
     NEventLoop::instance().postEvent(timer, event);
-    printf("[NTimer::timerCallback] postEvent returned\n");
+
     if (timer->m_singleShot)
         timer->deleteLater();
 }
 
 void NTimer::createTimer()
 {
-    printf("[NTimer] createTimer() interval=%d\n", m_interval); // DEBUG
     if (m_handle)
         return;
 
@@ -180,8 +169,6 @@ void NTimer::createTimer()
 
     if (!m_handle) {
         nError() << "NTimer: Failed to create FreeRTOS timer";
-    } else {
-        printf("[NTimer] xTimerCreate succeeded, handle=%p\n", m_handle);
     }
 }
 
@@ -198,21 +185,15 @@ void NTimer::deleteTimer()
 
 void NTimer::updateTimer()
 {
-    printf("[NTimer] updateTimer: entered, m_handle=%p, m_interval=%d\n", m_handle, m_interval);
     if (!m_handle) {
-        printf("[NTimer] updateTimer: no handle, returning\n");
         return;
     }
-    printf("[NTimer] updateTimer: calling xTimerChangePeriod\n");
-    BaseType_t res = xTimerChangePeriod(m_handle, pdMS_TO_TICKS(m_interval), 0);
-    printf("[NTimer] updateTimer: xTimerChangePeriod returned %d\n", res);
+    BaseType_t res = xTimerChangePeriod(m_handle, pdMS_TO_TICKS(m_interval), 0);    
 }
 
 void NTimer::timerEvent(NTimerEvent* event)
 {
-    printf("[NTimer::timerEvent] entered, timerId=%d, m_timerId=%d\n", event->timerId(), m_timerId);
     if (event->timerId() == m_timerId) {
-        printf("[NTimer::timerEvent] emitting timeout\n");
         timeout.emitSignal();
     }
 }
