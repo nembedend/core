@@ -1,33 +1,33 @@
 idf_component_register(
     SRCS
-        nbufferdevice.cpp
-        nbytearray.cpp
-        ncolor.cpp
-        ncoreapplication.cpp
-        ndatastream.cpp
-        ndebug.cpp
-        nevent.cpp
-        neventloop.cpp
-        nfile.cpp
-        ngpiopin.cpp
-        ni2c.cpp
-        nimage.cpp
-        niodevice.cpp
-        nobject.cpp
-        npoint.cpp
-        nrect.cpp
-        nserialport.cpp
-        nsize.cpp
-        nspibus.cpp
-        nspidevice.cpp
-        nstring.cpp
-        ntimer.cpp
-        nvariant.cpp
-        nsignalbus.cpp
-        ntranslator.cpp
-        nthread.cpp
-        nmetaconnection.cpp
-        nmutex.cpp
+        src/nbufferdevice.cpp
+        src/nbytearray.cpp
+        src/ncolor.cpp
+        src/ncoreapplication.cpp
+        src/ndatastream.cpp
+        src/ndebug.cpp
+        src/nevent.cpp
+        src/neventloop.cpp
+        src/nfile.cpp
+        src/ngpiopin.cpp
+        src/ni2c.cpp
+        src/nimage.cpp
+        src/niodevice.cpp
+        src/nobject.cpp
+        src/npoint.cpp
+        src/nrect.cpp
+        src/nserialport.cpp
+        src/nsize.cpp
+        src/nspibus.cpp
+        src/nspidevice.cpp
+        src/nstring.cpp
+        src/ntimer.cpp
+        src/nvariant.cpp
+        src/nsignalbus.cpp
+        src/ntranslator.cpp
+        src/nthread.cpp
+        src/nmetaconnection.cpp
+        src/nmutex.cpp
     INCLUDE_DIRS
         "."
     REQUIRES
