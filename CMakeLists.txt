@@ -29,7 +29,7 @@ idf_component_register(
         src/nmetaconnection.cpp
         src/nmutex.cpp
     INCLUDE_DIRS
-        "."
+        "src"
     REQUIRES
         freertos
         esp_timer
