@@ -18,3 +18,4 @@ CMakeLists.txt.user
 CMakeCache.txt*
 CMakeFiles*
 build/
+sdkconfig
